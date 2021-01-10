@@ -21,6 +21,22 @@ const Client = database.define('clients', {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
+    },
+    logradouro: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    bairro: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    localidade: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    uf: {
+        type: DataTypes.STRING,
+        allowNull: true,
     }
 });
 
