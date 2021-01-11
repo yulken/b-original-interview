@@ -119,12 +119,12 @@ definitions:
     - "cpf"
     - "cep"
     properties:
-      id:
-        type: "string"
-        format: "uuid"
       name:
         type: "string"
         example: "Caio Torres"
+      cpf:
+        type: "string"
+        example: "13496178736"
       email: 
         type: "string"
         example: "caio.torres@original.com.br"
