@@ -2,7 +2,15 @@
 
 ## Installation
 
-Before proceeding, it is necessary to report that I've found some issues using SQLite3 with Node.js versions >=12. In order to test this assignment, I strongly recommend the following steps:
+### Installing packages
+
+To install the API, run:
+
+```console
+npm install
+```
+
+Before proceeding, it is necessary to report that I've found some issues using SQLite3 with Node.js versions >=12. If you had any issues installing some of the packages on the previous step, the following steps are recommended:
 
 ### Setting Node.js to v10.23.1
 
@@ -13,14 +21,6 @@ This was the latest version I could use to run this API.
 
  sudo n 10.23.1
  ```
-
-### Installing packages
-
-To install the API, run:
-
-```console
-npm install
-```
 
 ### Usage
 
