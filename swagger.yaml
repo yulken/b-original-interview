@@ -1,0 +1,133 @@
+swagger: "2.0"
+info:
+  description: "An interview task from Banco Original"
+  version: "1.0.0"
+  title: "Banco Original Interview Task"
+  contact:
+    name: "Caio Torres"
+    email: "caiocftorres@gmail.com"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+basePath: "/v2"
+tags:
+- name: "Client"
+schemes:
+- "http"
+paths:
+  /clients:
+    post:
+      tags:
+      - "client"
+      summary: "Register a new client"
+      description: ""
+      operationId: "addPet"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "client that needs to be added to the system"
+        required: true
+        schema:
+          $ref: "#/definitions/ClientSubmitted"
+      responses:
+        "200":
+          description: "OK"
+        "400":
+          description: "Invalid CEP || Duplicated CPF || Duplicated Email"
+    get:
+      tags:
+      - "client"
+      summary: "Find clients"
+      description: "Returns all clients"
+      operationId: "getClients"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ClientReturned"
+        "404":
+          description: "Client Not Found"
+  /clients/{email}:
+    get:
+      tags:
+      - "client"
+      summary: "Find Client by e-mail"
+      description: "Returns a single Client"
+      operationId: "getClientById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "email"
+        in: "path"
+        description: "email of client to return"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ClientReturned"
+        "404":
+          description: "Client Not Found"
+definitions:
+  ClientReturned:
+    type: "object"
+    required:
+    - "name"
+    - "email"
+    - "cpf"
+    - "cep"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+      name:
+        type: "string"
+        example: "Caio Torres"
+      email: 
+        type: "string"
+        example: "caio.torres@original.com.br"
+      logradouro: 
+        type: "string"
+        example: "Rua Alfredo Barbosa"
+      bairro: 
+        type: "string"
+        example: "Heliópolis"
+      localidade: 
+        type: "string"
+        example: "Belford Roxo"
+      uf: 
+        type: "string"
+        example: "RJ"
+      createdAt: 
+        type: "string"
+        example: "2021-01-10T22:29:29.321Z"
+      updatedAt: 
+        type: "string"
+        example: "2021-01-10T22:29:29.321Z"
+  ClientSubmitted:
+    type: "object"
+    required:
+    - "name"
+    - "email"
+    - "cpf"
+    - "cep"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+      name:
+        type: "string"
+        example: "Caio Torres"
+      email: 
+        type: "string"
+        example: "caio.torres@original.com.br"
+      cep:
+        type: "string"
+        example: "26140-280"

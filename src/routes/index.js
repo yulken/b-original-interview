@@ -5,14 +5,24 @@ const routes = Router();
 const clientService = new ClientService();
 
 routes.get('/clients', async (request, response) => {
-    const clients = await clientService.findAll();
-    return response.json(clients)
+    try {
+        const clients = await clientService.findAll();
+        return response.json(clients)
+    }
+    catch (err) {
+        return response.status(404).json({ error: err.message });
+    }
 })
 
 routes.get('/clients/:email', async (request, response) => {
-    const { email } = request.params
-    const client = await clientService.findByEmail(email);
-    return response.json(client)
+    try {
+        const { email } = request.params
+        const client = await clientService.findByEmail(email);
+        return response.json(client)
+    }
+    catch (err) {
+        return response.status(404).json({ error: err.message });
+    }
 })
 
 routes.post('/clients', async (request, response) => {

@@ -3,22 +3,19 @@ import api from '../services/apiClient';
 
 export default class ClientService {
     async findAll() {
-        try {
-            const clients = await Client.findAll({});
-            return clients;
+        const clients = await Client.findAll({});
+        if (clients.length == 0) {
+            throw new Error("Client Not Found")
         }
-        catch (err) {
-            throw new Error(err);
-        }
+        return clients;
+
     }
     async findByEmail(email) {
-        try {
-            const clients = await Client.findAll({ where: { email: `${email}` } });
-            return clients;
+        const clients = await Client.findAll({ where: { email: `${email}` } });
+        if (clients.length == 0) {
+            throw new Error("Client Not Found")
         }
-        catch (err) {
-            throw new Error(err);
-        }
+        return clients;
     }
     async create(name, cpf, email, cep) {
         const hasCpf = await Client.findAll({ where: { cpf: `${cpf}` } });
@@ -31,6 +28,9 @@ export default class ClientService {
         }
         try {
             const address = await api.get(`ws/${cep.replace(/\D+/g, '')}/json/`)
+            if (address.data.erro == true) {
+                throw new Error('Invalid CEP');
+            }
             const client = await Client.create({
                 name,
                 email,
